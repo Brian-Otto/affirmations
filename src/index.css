@@ -1,6 +1,18 @@
 @import "tailwindcss";
 @import "@catppuccin/tailwindcss/mocha.css";
 
+@font-face {
+    font-family: 'IndieFlower';
+    src: url('./assets/fonts/IndieFlower-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@theme {
+  --font-IndieFlower: "IndieFlower", system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 
