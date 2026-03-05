@@ -5,6 +5,13 @@ const LOCAL_STORAGE_DATE_KEY = "affirmationDate";
 const LOCAL_STORAGE_TODAY_KEY = "affirmationToday";
 const LOCAL_STORAGE_LIST_KEY = "affirmationsList";
 
+/**
+ * returns the affirmation id for today from localStorage
+ * picks a new random affirmation when the day changes, avoiding already shown ones
+ * resets the shown list when all affirmations have been shown
+ *
+ * @returns id of today's affirmation
+ */
 export function getAffirmationTodayId() {
   const todayString = new Date().toDateString();
   const storedDate = localStorage.getItem(LOCAL_STORAGE_DATE_KEY);
