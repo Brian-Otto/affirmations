@@ -10,7 +10,6 @@ export function getAffirmationTodayId() {
   const storedDate = localStorage.getItem(LOCAL_STORAGE_DATE_KEY);
 
   if (storedDate !== todayString) {
-    localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify([]));
     localStorage.setItem(LOCAL_STORAGE_TODAY_KEY, "");
     localStorage.setItem(LOCAL_STORAGE_DATE_KEY, todayString);
   }
