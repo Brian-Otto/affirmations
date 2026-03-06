@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Cat from "../assets/images/cat.svg?react";
-import CatCurled from "../assets/images/cat-curled.svg?react";
 
 const LOCAL_STORAGE_DATE_KEY = "affirmationDate";
 const LOCAL_STORAGE_TODAY_KEY = "iconToday";
