@@ -1,0 +1,3 @@
+Doodle Icons (./src/images/doodles)
+Vectors and icons by Vectordoodle (https://vectordoodle.gumroad.com/l/FOCLd?ref=svgrepo.com) in CC Attribution License via SVG Repo (https://www.svgrepo.com/)
+https://www.svgrepo.com/collection/doodle-library-hand-drawn-vectors
