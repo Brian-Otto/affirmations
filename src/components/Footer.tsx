@@ -6,6 +6,11 @@ function Footer() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
+  const infoText1 =
+    "Affirmationen sind positive Selbstaussagen, die als psychologisches Werkzeug dienen, um das Unterbewusstsein umzuprogrammieren, Selbstvertrauen zu stärken und negative Gedankenmuster zu durchbrechen. \nSie werden meist als bejahende „Ich bin“-Sätze formuliert (z.B. „Ich bin mutig“), die täglich laut oder in Gedanken wiederholt werden, um Wohlbefinden und Lebensfreude zu steigern. ";
+  const infoText2 =
+    "Diese Website bietet die Möglichkeit täglich eine neue Affirmation zu sehen. (Solange der Vorrat reicht!) \nDiese werden nicht jeden Tag perfekt auf dich zugeschnitten sein und das ist okay. \nWenn du auch nur eine Affirmation findest, die dir gut tut, ist mein Ziel erfüllt. \nViel Spaß beim Entdecken!";
+
   return (
     <div className="w-full text-ctp-text bg-ctp-mantle py-8 px-14 flex gap-4 items-center justify-center inset-shadow-xs">
       <button
@@ -17,7 +22,9 @@ function Footer() {
       </button>
       {isInfoOpen && (
         <Modal onClose={() => setIsInfoOpen(false)}>
-          <span>Dieser Teil ist noch in Arbeit.</span>
+          <p className="whitespace-pre-wrap">{infoText1}</p>
+          <p className="my-2 text-center">·</p>
+          <p className="whitespace-pre-wrap">{infoText2}</p>
         </Modal>
       )}
       <button
