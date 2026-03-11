@@ -11,8 +11,31 @@ function Footer() {
   const infoText2 =
     "Diese Website bietet die Möglichkeit täglich eine neue Affirmation zu sehen. (Solange der Vorrat reicht!) \nDiese werden nicht jeden Tag perfekt auf dich zugeschnitten sein und das ist okay. \nWenn du auch nur eine Affirmation findest, die dir gut tut, ist mein Ziel erfüllt. \nViel Spaß beim Entdecken!";
 
+  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const theme = e.target.value;
+    const root = document.documentElement;
+
+    root.classList.remove("latte", "mocha");
+
+    if (theme === "light") {
+      root.classList.add("latte");
+      localStorage.setItem("theme", "light");
+    } else if (theme === "dark") {
+      root.classList.add("mocha");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // system theme
+      localStorage.removeItem("theme");
+
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      root.classList.add(prefersDark ? "mocha" : "latte");
+    }
+  };
+
   return (
-    <div className="w-full text-ctp-text bg-ctp-mantle py-8 px-14 flex gap-4 items-center justify-center inset-shadow-xs">
+    <div className="w-full text-ctp-text bg-ctp-mantle py-8 px-8 sm:px-14 flex gap-4 items-center justify-center inset-shadow-xs">
       <button
         type="button"
         onClick={() => setIsInfoOpen(true)}
@@ -36,7 +59,20 @@ function Footer() {
       </button>
       {isSettingsOpen && (
         <Modal onClose={() => setIsSettingsOpen(false)}>
-          <span>Dieser Teil ist noch in Arbeit.</span>
+          <div className="w-full flex justify-between items-center">
+            <label htmlFor="theme">Theme</label>
+
+            <select
+              onChange={handleThemeChange}
+              className="bg-ctp-base border border-ctp-lavender focus:outline-ctp-lavender focus:outline-1 px-2 py-1 rounded"
+              name="theme"
+              id="theme"
+            >
+              <option value="system">System</option>
+              <option value="light">Hell</option>
+              <option value="dark">Dunkel</option>
+            </select>
+          </div>
         </Modal>
       )}
     </div>

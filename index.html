@@ -5,6 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="/heart.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Affirmation</title>
+    <script>
+      // loading the theme and setting the right ctp theme
+      const theme = localStorage.getItem("theme");
+      if (theme) {
+        if (theme === "light") {
+          document.documentElement.classList.add("latte")
+        } else if (theme === "dark") {
+          document.documentElement.classList.add("mocha")
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
