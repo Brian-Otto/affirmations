@@ -1,9 +1,12 @@
 import InfoIcon from "../assets/icons/info-svgrepo-com.svg?react";
 import SettingsIcon from "../assets/icons/cog-svgrepo-com.svg?react";
+import QRCodeIcon from "../assets/icons/qrcode-svgrepo-com.svg?react";
+import QRCode from "../assets/images/qrcode.svg?react";
 import { useState } from "react";
 import Modal from "./Modal";
 function Footer() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [isQROpen, setIsQROpen] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const infoText1 =
@@ -52,6 +55,19 @@ function Footer() {
       )}
       <button
         type="button"
+        onClick={() => setIsQROpen(true)}
+        className="bg-ctp-crust h-10 w-10 flex justify-center items-center rounded-full p-1 cursor-pointer text-ctp-subtext0 hover:text-ctp-text"
+      >
+        <QRCodeIcon className="w-full h-full" />
+      </button>
+      {isQROpen && <Modal onClose={() => setIsQROpen(false)}>
+        <div className="flex flex-col gap-4">
+        <p className="text-center">Teile die Seite mit deinen Freunden!</p>
+        <QRCode className="w-full h-full" />
+        </div>
+      </Modal>}
+      <button
+        type="button"
         onClick={() => setIsSettingsOpen(true)}
         className="bg-ctp-crust h-10 w-10 flex justify-center items-center rounded-full p-1 cursor-pointer text-ctp-subtext0 hover:text-ctp-text"
       >
@@ -67,6 +83,7 @@ function Footer() {
               className="bg-ctp-base border border-ctp-lavender focus:outline-ctp-lavender focus:outline-1 px-2 py-1 rounded"
               name="theme"
               id="theme"
+              defaultValue={localStorage.getItem("theme") || "system"}
             >
               <option value="system">System</option>
               <option value="light">Hell</option>
