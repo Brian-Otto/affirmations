@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const LOCAL_STORAGE_DATE_KEY = "affirmationIconDate";
-const LOCAL_STORAGE_TODAY_KEY = "iconToday";
+export const LOCAL_STORAGE_ICON_DATE_KEY = "affirmationIconDate";
+export const LOCAL_STORAGE_ICON_TODAY_KEY = "iconToday";
 
 /**
  * Returns the icon index for today from localStorage.
@@ -12,21 +12,21 @@ const LOCAL_STORAGE_TODAY_KEY = "iconToday";
  */
 export function getIconTodayIndex(iconCount: number): number {
   const todayString = new Date().toDateString();
-  const storedDate = localStorage.getItem(LOCAL_STORAGE_DATE_KEY);
-  const storedIndex = localStorage.getItem(LOCAL_STORAGE_TODAY_KEY);
+  const storedDate = localStorage.getItem(LOCAL_STORAGE_ICON_DATE_KEY);
+  const storedIndex = localStorage.getItem(LOCAL_STORAGE_ICON_TODAY_KEY);
 
   if (storedDate === todayString && storedIndex !== null) {
     return Number(storedIndex);
   }
 
-  localStorage.setItem(LOCAL_STORAGE_DATE_KEY, todayString);
+  localStorage.setItem(LOCAL_STORAGE_ICON_DATE_KEY, todayString);
 
   let index;
   do {
     index = Math.floor(Math.random() * iconCount);
   } while (iconCount > 1 && String(index) === storedIndex);
 
-  localStorage.setItem(LOCAL_STORAGE_TODAY_KEY, String(index));
+  localStorage.setItem(LOCAL_STORAGE_ICON_TODAY_KEY, String(index));
   return index;
 }
 

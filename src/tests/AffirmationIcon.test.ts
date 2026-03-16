@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { getIconTodayIndex } from "../components/AffirmationIcon.tsx";
+import { getIconTodayIndex, LOCAL_STORAGE_ICON_DATE_KEY, LOCAL_STORAGE_ICON_TODAY_KEY } from "../components/AffirmationIcon.tsx";
 
 const TODAY = new Date().toDateString();
 const TOMORROW = new Date(Date.now() + 86400000).toDateString();
@@ -23,21 +23,21 @@ describe("getIconTodayIndex", () => {
 
   it("stores today's date in localStorage", () => {
     getIconTodayIndex(5);
-    expect(localStorage.getItem("affirmationDate")).toBe(TODAY);
+    expect(localStorage.getItem(LOCAL_STORAGE_ICON_DATE_KEY)).toBe(TODAY);
   });
 
   it("reuses stored index if date matches today", () => {
-    localStorage.setItem("affirmationDate", TODAY);
-    localStorage.setItem("iconToday", "3");
+    localStorage.setItem(LOCAL_STORAGE_ICON_DATE_KEY, TODAY);
+    localStorage.setItem(LOCAL_STORAGE_ICON_TODAY_KEY, "3");
     const index = getIconTodayIndex(5);
     expect(index).toBe(3);
   });
 
   it("resets index when date has changed", () => {
-    localStorage.setItem("affirmationDate", TOMORROW);
+    localStorage.setItem(LOCAL_STORAGE_ICON_DATE_KEY, TOMORROW);
     localStorage.setItem("iconToday", "3");
     getIconTodayIndex(5);
-    expect(localStorage.getItem("affirmationDate")).toBe(TODAY);
-    expect(localStorage.getItem("iconToday")).not.toBe("3");
+    expect(localStorage.getItem(LOCAL_STORAGE_ICON_DATE_KEY)).toBe(TODAY);
+    expect(localStorage.getItem(LOCAL_STORAGE_ICON_TODAY_KEY)).not.toBe("3");
   });
 });

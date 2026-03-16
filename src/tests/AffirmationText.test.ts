@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { getAffirmationTodayId } from "../components/AffirmationText";
+import { getAffirmationTodayId, LOCAL_STORAGE_TEXT_DATE_KEY, LOCAL_STORAGE_TEXT_LIST_KEY, LOCAL_STORAGE_TEXT_TODAY_KEY } from "../components/AffirmationText";
 
 const TODAY = new Date().toDateString();
 const YESTERDAY = new Date(Date.now() - 86400000).toDateString();
@@ -30,50 +30,50 @@ describe("getAffirmationTodayId", () => {
 
   it("stores today's date in localStorage", () => {
     getAffirmationTodayId();
-    expect(localStorage.getItem("affirmationDate")).toBe(TODAY);
+    expect(localStorage.getItem(LOCAL_STORAGE_TEXT_DATE_KEY)).toBe(TODAY);
   });
 
   it("reuses stored id if date matches today", () => {
-    localStorage.setItem("affirmationDate", TODAY);
-    localStorage.setItem("affirmationToday", "2");
-    localStorage.setItem("affirmationsList", JSON.stringify([2]));
+    localStorage.setItem(LOCAL_STORAGE_TEXT_DATE_KEY, TODAY);
+    localStorage.setItem(LOCAL_STORAGE_TEXT_TODAY_KEY, "2");
+    localStorage.setItem(LOCAL_STORAGE_TEXT_LIST_KEY, JSON.stringify([2]));
     const id = getAffirmationTodayId();
     expect(id).toBe(2);
   });
 
   it("resets and picks a new affirmation when the date has changed", () => {
-    localStorage.setItem("affirmationDate", YESTERDAY);
-    localStorage.setItem("affirmationToday", "2");
-    localStorage.setItem("affirmationsList", JSON.stringify([2]));
+    localStorage.setItem(LOCAL_STORAGE_TEXT_DATE_KEY, YESTERDAY);
+    localStorage.setItem(LOCAL_STORAGE_TEXT_TODAY_KEY, "2");
+    localStorage.setItem(LOCAL_STORAGE_TEXT_LIST_KEY, JSON.stringify([2]));
     getAffirmationTodayId();
-    expect(localStorage.getItem("affirmationDate")).toBe(TODAY);
-    const raw = localStorage.getItem("affirmationsList");
+    expect(localStorage.getItem(LOCAL_STORAGE_TEXT_DATE_KEY)).toBe(TODAY);
+    const raw = localStorage.getItem(LOCAL_STORAGE_TEXT_LIST_KEY);
     const list = JSON.parse(raw ?? "[]");
     expect(list.length).toBe(2);
   });
 
   it("adds the selected id to the shown list", () => {
     const id = getAffirmationTodayId();
-    const list = JSON.parse(localStorage.getItem("affirmationsList")!);
+    const list = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEXT_LIST_KEY)!);
     expect(list).toContain(id);
   });
 
   it("cycles through all affirmations before repeating", () => {
     // Show 2 out of 3, the next pick must be the remaining one
-    localStorage.setItem("affirmationDate", TODAY);
-    localStorage.setItem("affirmationsList", JSON.stringify([1, 2]));
-    localStorage.setItem("affirmationToday", "");
+    localStorage.setItem(LOCAL_STORAGE_TEXT_DATE_KEY, TODAY);
+    localStorage.setItem(LOCAL_STORAGE_TEXT_LIST_KEY, JSON.stringify([1, 2]));
+    localStorage.setItem(LOCAL_STORAGE_TEXT_TODAY_KEY, "");
     const id = getAffirmationTodayId();
     expect(id).toBe(3);
   });
 
   it("resets the shown list when all affirmations have been shown", () => {
-    localStorage.setItem("affirmationDate", TODAY);
-    localStorage.setItem("affirmationsList", JSON.stringify([1, 2, 3]));
-    localStorage.setItem("affirmationToday", "");
+    localStorage.setItem(LOCAL_STORAGE_TEXT_DATE_KEY, TODAY);
+    localStorage.setItem(LOCAL_STORAGE_TEXT_LIST_KEY, JSON.stringify([1, 2, 3]));
+    localStorage.setItem(LOCAL_STORAGE_TEXT_TODAY_KEY, "");
     getAffirmationTodayId();
     // After reset it picks from the full list again
-    const list = JSON.parse(localStorage.getItem("affirmationsList")!);
+    const list = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEXT_LIST_KEY)!);
     expect(list.length).toBe(1);
   });
 });
