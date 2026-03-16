@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const LOCAL_STORAGE_DATE_KEY = "affirmationDate";
+const LOCAL_STORAGE_DATE_KEY = "affirmationIconDate";
 const LOCAL_STORAGE_TODAY_KEY = "iconToday";
 
 /**

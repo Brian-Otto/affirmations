@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import affirmations from "../data/affirmations";
 
-const LOCAL_STORAGE_DATE_KEY = "affirmationDate";
+const LOCAL_STORAGE_DATE_KEY = "affirmationTextDate";
 const LOCAL_STORAGE_TODAY_KEY = "affirmationToday";
 const LOCAL_STORAGE_LIST_KEY = "affirmationsList";
 
