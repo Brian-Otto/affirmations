@@ -38,11 +38,12 @@ function Footer() {
   };
 
   return (
-    <div className="w-full text-ctp-text bg-ctp-mantle py-8 px-8 sm:px-14 flex gap-4 items-center justify-center inset-shadow-xs">
+    <footer className="w-full text-ctp-text bg-ctp-mantle py-8 px-8 sm:px-14 flex gap-4 items-center justify-center inset-shadow-xs">
       <button
         type="button"
         onClick={() => setIsInfoOpen(true)}
         className="ml-auto bg-ctp-crust h-10 w-10 flex justify-center items-center rounded-full p-1 cursor-pointer text-ctp-subtext0 hover:text-ctp-text"
+        aria-label="Informationen anzeigen"
       >
         <InfoIcon className="w-full h-full " />
       </button>
@@ -57,6 +58,7 @@ function Footer() {
         type="button"
         onClick={() => setIsQROpen(true)}
         className="bg-ctp-crust h-10 w-10 flex justify-center items-center rounded-full p-1 cursor-pointer text-ctp-subtext0 hover:text-ctp-text"
+        aria-label="QR-Code anzeigen"
       >
         <QRCodeIcon className="w-full h-full" />
       </button>
@@ -70,6 +72,7 @@ function Footer() {
         type="button"
         onClick={() => setIsSettingsOpen(true)}
         className="bg-ctp-crust h-10 w-10 flex justify-center items-center rounded-full p-1 cursor-pointer text-ctp-subtext0 hover:text-ctp-text"
+        aria-label="Einstellungen anzeigen"
       >
         <SettingsIcon className="w-full h-full" />
       </button>
@@ -92,7 +95,7 @@ function Footer() {
           </div>
         </Modal>
       )}
-    </div>
+    </footer>
   );
 }
 

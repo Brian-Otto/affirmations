@@ -8,11 +8,11 @@ function App() {
   return (
     <div className="bg-ctp-base flex flex-col justify-center items-center">
       <Toaster position="top-center" />
-      <SWToast />
-      <div className="h-screen w-screen max-w-sm md:max-w-md lg:max-w-lg p-6 flex flex-col gap-4 justify-center items-center text-center">
+      <main className="h-screen w-screen max-w-sm md:max-w-md lg:max-w-lg p-6 flex flex-col gap-4 justify-center items-center text-center">
+        <SWToast />
         <AffirmationIcon className="text-ctp-text w-20 h-20" />
         <AffirmationText className="text-ctp-text text-2xl font-IndieFlower" />
-      </div>
+      </main>
       <Footer />
     </div>
   );

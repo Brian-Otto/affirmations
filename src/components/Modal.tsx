@@ -43,6 +43,7 @@ function Modal({ onClose, children }: ModalProps) {
             type="button"
             onClick={onClose}
             className="ml-auto hover:text-ctp-red transition-colors mt-8 mb-4 w-8 h-8"
+            aria-label="Dialogfenster schließen"
           >
             <CloseIcon />
           </button>
