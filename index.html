@@ -2,17 +2,22 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/heart.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Affira</title>
+    <meta name="descripton" content="Tägliche Affirmationen für dich!" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="mask-icon" href="/mask-icon.svg" color="#FFFFFF" />
+    <meta name="theme-color" content="#ffffff" />
     <script>
       // loading the theme and setting the right ctp theme
       const theme = localStorage.getItem("theme");
       if (theme) {
         if (theme === "light") {
-          document.documentElement.classList.add("latte")
+          document.documentElement.classList.add("latte");
         } else if (theme === "dark") {
-          document.documentElement.classList.add("mocha")
+          document.documentElement.classList.add("mocha");
         }
       }
     </script>

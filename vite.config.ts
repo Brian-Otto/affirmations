@@ -12,9 +12,27 @@ export default defineConfig({
     tailwindcss(),
     svgr(),
     VitePWA({
-      registerType: "autoUpdate",
       devOptions: { enabled: true },
-      workbox: { globPatterns: ["**/*.{js,css,html,ico,png,svg,woff}"] },
+      workbox: { globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,txt}"] },
+      includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
+      manifest: {
+        name: "Affira",
+        short_name: "Affira",
+        description: "Tägliche Affirmationen für dich!",
+        theme_color: "#ffffff",
+        icons: [
+          {
+            src: "pwa-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "pwa-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      },
     }),
   ],
   test: { environment: "jsdom" },
