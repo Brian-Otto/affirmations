@@ -5,6 +5,7 @@ import DownloadIcon from "../assets/icons/download-svgrepo-com.svg?react";
 import QRCode from "../assets/images/qrcode.svg?react";
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
+import FooterIconButton from "./FooterIconButton";
 function Footer() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isQROpen, setIsQROpen] = useState(false);
@@ -65,14 +66,12 @@ function Footer() {
 
   return (
     <footer className="w-full text-ctp-text bg-ctp-mantle py-8 px-8 sm:px-14 flex gap-4 items-center justify-center inset-shadow-xs">
-      <button
-        type="button"
+      <FooterIconButton
         onClick={() => setIsInfoOpen(true)}
-        className="ml-auto bg-ctp-crust h-10 w-10 flex justify-center items-center rounded-full p-1 cursor-pointer text-ctp-subtext0 hover:text-ctp-text"
-        aria-label="Informationen anzeigen"
-      >
-        <InfoIcon className="w-full h-full " />
-      </button>
+        className="ml-auto"
+        ariaLabel="Informationen anzeigen"
+        icon={<InfoIcon className="w-full h-full" />}
+      />
       {isInfoOpen && (
         <Modal onClose={() => setIsInfoOpen(false)}>
           <p className="whitespace-pre-wrap">{infoText1}</p>
@@ -80,14 +79,11 @@ function Footer() {
           <p className="whitespace-pre-wrap">{infoText2}</p>
         </Modal>
       )}
-      <button
-        type="button"
+      <FooterIconButton
         onClick={() => setIsQROpen(true)}
-        className="bg-ctp-crust h-10 w-10 flex justify-center items-center rounded-full p-1 cursor-pointer text-ctp-subtext0 hover:text-ctp-text"
-        aria-label="QR-Code anzeigen"
-      >
-        <QRCodeIcon className="w-full h-full" />
-      </button>
+        ariaLabel="QR-Code anzeigen"
+        icon={<QRCodeIcon className="w-full h-full" />}
+      />
       {isQROpen && (
         <Modal onClose={() => setIsQROpen(false)}>
           <div className="flex flex-col gap-4">
@@ -97,23 +93,17 @@ function Footer() {
         </Modal>
       )}
       {deferredPrompt && (
-        <button
-          type="button"
+        <FooterIconButton
           onClick={handleDownload}
-          className="bg-ctp-crust h-10 w-10 flex justify-center items-center rounded-full p-1 cursor-pointer text-ctp-subtext0 hover:text-ctp-text"
-          aria-label="App downloaden"
-        >
-          <DownloadIcon className="w-full h-full" />
-        </button>
+          ariaLabel="App downloaden"
+          icon={<DownloadIcon className="w-full h-full" />}
+        />
       )}
-      <button
-        type="button"
+      <FooterIconButton
         onClick={() => setIsSettingsOpen(true)}
-        className="bg-ctp-crust h-10 w-10 flex justify-center items-center rounded-full p-1 cursor-pointer text-ctp-subtext0 hover:text-ctp-text"
-        aria-label="Einstellungen anzeigen"
-      >
-        <SettingsIcon className="w-full h-full" />
-      </button>
+        ariaLabel="Einstellungen anzeigen"
+        icon={<SettingsIcon className="w-full h-full" />}
+      />
       {isSettingsOpen && (
         <Modal onClose={() => setIsSettingsOpen(false)}>
           <div className="w-full flex justify-between items-center">
