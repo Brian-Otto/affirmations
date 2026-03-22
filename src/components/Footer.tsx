@@ -1,12 +1,14 @@
 import InfoIcon from "../assets/icons/info-svgrepo-com.svg?react";
 import SettingsIcon from "../assets/icons/cog-svgrepo-com.svg?react";
 import QRCodeIcon from "../assets/icons/qrcode-svgrepo-com.svg?react";
+import DownloadIcon from "../assets/icons/download-svgrepo-com.svg?react";
 import QRCode from "../assets/images/qrcode.svg?react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "./Modal";
 function Footer() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
-  const [isQROpen, setIsQROpen] = useState(false)
+  const [isQROpen, setIsQROpen] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const infoText1 =
@@ -37,6 +39,30 @@ function Footer() {
     }
   };
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleDownload = async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+
+    /*
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response: ${outcome}`);
+    */
+
+    setDeferredPrompt(null);
+  };
+
   return (
     <footer className="w-full text-ctp-text bg-ctp-mantle py-8 px-8 sm:px-14 flex gap-4 items-center justify-center inset-shadow-xs">
       <button
@@ -62,12 +88,24 @@ function Footer() {
       >
         <QRCodeIcon className="w-full h-full" />
       </button>
-      {isQROpen && <Modal onClose={() => setIsQROpen(false)}>
-        <div className="flex flex-col gap-4">
-        <p className="text-center">Teile die Seite mit deinen Freunden!</p>
-        <QRCode className="w-full h-full" />
-        </div>
-      </Modal>}
+      {isQROpen && (
+        <Modal onClose={() => setIsQROpen(false)}>
+          <div className="flex flex-col gap-4">
+            <p className="text-center">Teile die Seite mit deinen Freunden!</p>
+            <QRCode className="w-full h-full" />
+          </div>
+        </Modal>
+      )}
+      {deferredPrompt && (
+        <button
+          type="button"
+          onClick={handleDownload}
+          className="bg-ctp-crust h-10 w-10 flex justify-center items-center rounded-full p-1 cursor-pointer text-ctp-subtext0 hover:text-ctp-text"
+          aria-label="App downloaden"
+        >
+          <DownloadIcon className="w-full h-full" />
+        </button>
+      )}
       <button
         type="button"
         onClick={() => setIsSettingsOpen(true)}
