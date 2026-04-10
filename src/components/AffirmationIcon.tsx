@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import icons from "../utils/affirmationIcon";
 
 export const LOCAL_STORAGE_ICON_DATE_KEY = "affirmationIconDate";
 export const LOCAL_STORAGE_ICON_TODAY_KEY = "iconToday";
@@ -30,15 +31,6 @@ export function getIconTodayIndex(iconCount: number): number {
   return index;
 }
 
-// [CatComponent, CatCurledComponent, ...]
-const icons = Object.values(
-  import.meta.glob("../assets/images/doodles/*.svg", {
-    eager: true,
-    query: "?react",
-    import: "default",
-  }),
-) as React.FunctionComponent<React.SVGProps<SVGSVGElement>>[];
-
 function AffirmationIcon({ className = "" }) {
   const [index, setIndex] = useState<number | null>(null);
 
@@ -49,7 +41,7 @@ function AffirmationIcon({ className = "" }) {
   if (index === null) return null;
 
   const Svg = icons[index];
-  return <Svg className={className} />;
+  return <div data-testid="affirmation-icon"><Svg className={className} /></div>;
 }
 
 export default AffirmationIcon;
