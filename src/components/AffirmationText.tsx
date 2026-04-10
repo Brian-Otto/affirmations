@@ -43,7 +43,7 @@ export function getAffirmationTodayId() {
   if (storedId === null || !affirmations.some((aff) => aff.id === storedId)) {
     const randomAffirmation =
       unshownAffirmations[
-        Math.floor(Math.random() * unshownAffirmations.length)
+      Math.floor(Math.random() * unshownAffirmations.length)
       ];
     storedId = randomAffirmation.id;
     localStorage.setItem(LOCAL_STORAGE_TEXT_TODAY_KEY, String(storedId));
@@ -71,7 +71,7 @@ function AffirmationText({ className = "" }) {
 
   if (!affirmation) return null;
 
-  return <span className={className}>{affirmation.text}</span>;
+  return <span className={className} data-testid="affirmation-text">{affirmation.text}</span>;
 }
 
 export default AffirmationText;

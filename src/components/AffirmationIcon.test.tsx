@@ -1,8 +1,13 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { getIconTodayIndex, LOCAL_STORAGE_ICON_DATE_KEY, LOCAL_STORAGE_ICON_TODAY_KEY } from "./AffirmationIcon.tsx";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import AffirmationIcon, { getIconTodayIndex, LOCAL_STORAGE_ICON_DATE_KEY, LOCAL_STORAGE_ICON_TODAY_KEY } from "./AffirmationIcon.tsx";
+import { render, screen } from "@testing-library/react";
 
 const TODAY = new Date().toDateString();
 const TOMORROW = new Date(Date.now() + 86400000).toDateString();
+
+vi.mock("../utils/affirmationIcon", () => ({
+  default: [() => <svg />],
+}));
 
 beforeEach(() => {
   localStorage.clear();
@@ -41,3 +46,11 @@ describe("getIconTodayIndex", () => {
     expect(localStorage.getItem(LOCAL_STORAGE_ICON_TODAY_KEY)).not.toBe("3");
   });
 });
+
+describe("AffirmationIcon", () => {
+  it("displays the icon-container", () => {
+    render(<AffirmationIcon />)
+
+    expect(screen.getByTestId("affirmation-icon")).toBeInTheDocument()
+  })
+})

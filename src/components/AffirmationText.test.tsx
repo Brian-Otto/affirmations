@@ -92,6 +92,6 @@ describe("AffirmationText", () => {
   it("display a text", () => {
     render(<AffirmationText />);
 
-    // expect(screen.getByRole("span")).CHECK HERE IF TEXTCONTENT IS HERE
+    expect(screen.getByTestId("affirmation-text")).toHaveTextContent(/\S/);
   });
 });
