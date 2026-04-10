@@ -1,5 +1,12 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { getAffirmationTodayId, LOCAL_STORAGE_TEXT_DATE_KEY, LOCAL_STORAGE_TEXT_LIST_KEY, LOCAL_STORAGE_TEXT_TODAY_KEY } from "../components/AffirmationText";
+import { render, screen } from "@testing-library/react";
+import AffirmationText from "./AffirmationText";
+import {
+  getAffirmationTodayId,
+  LOCAL_STORAGE_TEXT_DATE_KEY,
+  LOCAL_STORAGE_TEXT_LIST_KEY,
+  LOCAL_STORAGE_TEXT_TODAY_KEY,
+} from "./AffirmationText";
 
 const TODAY = new Date().toDateString();
 const YESTERDAY = new Date(Date.now() - 86400000).toDateString();
@@ -69,11 +76,22 @@ describe("getAffirmationTodayId", () => {
 
   it("resets the shown list when all affirmations have been shown", () => {
     localStorage.setItem(LOCAL_STORAGE_TEXT_DATE_KEY, TODAY);
-    localStorage.setItem(LOCAL_STORAGE_TEXT_LIST_KEY, JSON.stringify([1, 2, 3]));
+    localStorage.setItem(
+      LOCAL_STORAGE_TEXT_LIST_KEY,
+      JSON.stringify([1, 2, 3]),
+    );
     localStorage.setItem(LOCAL_STORAGE_TEXT_TODAY_KEY, "");
     getAffirmationTodayId();
     // After reset it picks from the full list again
     const list = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEXT_LIST_KEY)!);
     expect(list.length).toBe(1);
+  });
+});
+
+describe("AffirmationText", () => {
+  it("display a text", () => {
+    render(<AffirmationText />);
+
+    // expect(screen.getByRole("span")).CHECK HERE IF TEXTCONTENT IS HERE
   });
 });

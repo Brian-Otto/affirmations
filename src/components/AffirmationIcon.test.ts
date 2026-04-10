@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { getIconTodayIndex, LOCAL_STORAGE_ICON_DATE_KEY, LOCAL_STORAGE_ICON_TODAY_KEY } from "../components/AffirmationIcon.tsx";
+import { getIconTodayIndex, LOCAL_STORAGE_ICON_DATE_KEY, LOCAL_STORAGE_ICON_TODAY_KEY } from "./AffirmationIcon.tsx";
 
 const TODAY = new Date().toDateString();
 const TOMORROW = new Date(Date.now() + 86400000).toDateString();
