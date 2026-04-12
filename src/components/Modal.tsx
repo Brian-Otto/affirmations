@@ -34,12 +34,17 @@ function Modal({ onClose, children }: ModalProps) {
 
   return (
     <div
+      data-testid="backdrop"
       className="fixed inset-0 flex items-center justify-center bg-black/10 backdrop-blur-sm z-50"
       onClick={handleBackdropClick}
     >
-      <div className="bg-ctp-base text-ctp-text rounded-xl px-8 pb-8 border-ctp-lavender border-2 min-w-3xs w-full max-w-lg max-h-screen overflow-auto">
+      <div
+        data-testid="panel"
+        className="bg-ctp-base text-ctp-text rounded-xl px-8 pb-8 border-ctp-lavender border-2 min-w-3xs w-full max-w-lg max-h-screen overflow-auto"
+      >
         <div className="flex justify-end">
           <button
+            data-testid="close-button"
             type="button"
             onClick={onClose}
             className="ml-auto hover:text-ctp-red transition-colors mt-8 mb-4 w-8 h-8"
