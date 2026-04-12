@@ -9,7 +9,7 @@ function FooterIconButton({
   onClick,
   icon,
   ariaLabel,
-  className,
+  className = "",
 }: FooterIconButtonProps) {
   return (
     <button
