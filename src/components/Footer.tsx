@@ -6,6 +6,7 @@ import QRCode from "../assets/images/qrcode.svg?react";
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import FooterIconButton from "./FooterIconButton";
+import { applyTheme, type Theme } from "../utils/theme";
 function Footer() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isQROpen, setIsQROpen] = useState(false);
@@ -18,26 +19,7 @@ function Footer() {
     "Diese Website bietet die Möglichkeit täglich eine neue Affirmation zu sehen. (Solange der Vorrat reicht!) \nDiese werden nicht jeden Tag perfekt auf dich zugeschnitten sein und das ist okay. \nWenn du auch nur eine Affirmation findest, die dir gut tut, ist mein Ziel erfüllt. \nViel Spaß beim Entdecken!";
 
   const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const theme = e.target.value;
-    const root = document.documentElement;
-
-    root.classList.remove("latte", "mocha");
-
-    if (theme === "light") {
-      root.classList.add("latte");
-      localStorage.setItem("theme", "light");
-    } else if (theme === "dark") {
-      root.classList.add("mocha");
-      localStorage.setItem("theme", "dark");
-    } else {
-      // system theme
-      localStorage.removeItem("theme");
-
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      root.classList.add(prefersDark ? "mocha" : "latte");
-    }
+    applyTheme(e.target.value as Theme)
   };
 
   useEffect(() => {
