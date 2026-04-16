@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import affirmations from "../data/affirmations";
+import affirmations from "../content/affirmations";
 
 export const LOCAL_STORAGE_TEXT_DATE_KEY = "affirmationTextDate";
 export const LOCAL_STORAGE_TEXT_TODAY_KEY = "affirmationToday";
