@@ -11,7 +11,7 @@ import {
 const TODAY = new Date().toDateString();
 const YESTERDAY = new Date(Date.now() - 86400000).toDateString();
 
-vi.mock("../data/affirmations", () => ({
+vi.mock("../content/affirmations", () => ({
   default: [
     { id: 1, text: "You are great" },
     { id: 2, text: "You are kind" },
