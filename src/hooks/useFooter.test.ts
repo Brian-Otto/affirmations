@@ -53,7 +53,7 @@ describe("useFooter", () => {
     });
 
     it("calls preventDefault on the event", () => {
-      const { result: _ } = renderHook(() => useFooter());
+      renderHook(() => useFooter());
       const event = fireBeforeInstallPrompt();
       expect(event.defaultPrevented).toBe(true);
     });
