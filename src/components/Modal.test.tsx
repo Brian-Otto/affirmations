@@ -3,10 +3,6 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import Modal from "./Modal";
 import userEvent from "@testing-library/user-event";
 
-vi.mock("../assets/icons/close-svgrepo-com.svg?react", () => ({
-  default: () => <svg data-testid="close-icon" />,
-}));
-
 describe("Modal", () => {
   const onClose = vi.fn();
 
