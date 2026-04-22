@@ -1,6 +1,6 @@
 import { QrCode } from "lucide-react";
 import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import QRCode from "../assets/images/qrcode.svg?react";
 
 function QrDialog() {
@@ -14,8 +14,11 @@ function QrDialog() {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        Teile die Seite mit deinen Freunden!
+                        QR-Code
                     </DialogTitle>
+                    <DialogDescription>
+                        Teile die Seite mit deinen Freunden!
+                    </DialogDescription>
                 </DialogHeader>
                 <QRCode className="mx-auto w-full h-full max-w-md" />
             </DialogContent>
