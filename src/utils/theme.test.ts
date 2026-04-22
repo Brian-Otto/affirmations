@@ -2,14 +2,14 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { applyTheme } from "./theme";
 
 beforeEach(() => {
-  document.documentElement.classList.remove("latte", "mocha");
+  document.documentElement.classList.remove("latte", "mocha", "dark");
   localStorage.clear();
   window.matchMedia = vi.fn().mockReturnValue({ matches: false });
 });
 
 describe("applyTheme", () => {
   beforeEach(() => {
-    document.documentElement.classList.remove("latte", "mocha");
+    document.documentElement.classList.remove("latte", "mocha", "dark");
     localStorage.clear();
   });
 
@@ -24,6 +24,7 @@ describe("applyTheme", () => {
     applyTheme("dark");
 
     expect(document.documentElement.classList.contains("mocha")).toBe(true);
+    expect(document.documentElement.classList.contains("dark")).toBe(true);
     expect(localStorage.getItem("theme")).toBe("dark");
   });
 
@@ -33,6 +34,7 @@ describe("applyTheme", () => {
 
     expect(document.documentElement.classList.contains("latte")).toBe(false);
     expect(document.documentElement.classList.contains("mocha")).toBe(true);
+    expect(document.documentElement.classList.contains("dark")).toBe(true);
   });
 
   it("removes theme from localStorage when system is selected", () => {
@@ -47,6 +49,7 @@ describe("applyTheme", () => {
     applyTheme("system");
 
     expect(document.documentElement.classList.contains("mocha")).toBe(true);
+    expect(document.documentElement.classList.contains("dark")).toBe(true);
   });
 
   it("adds latte when system prefers light", () => {
