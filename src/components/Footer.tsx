@@ -12,7 +12,7 @@ function Footer() {
   const { activeModal, setActiveModal, deferredPrompt, handleInstall } = useFooter();
 
   return (
-    <footer className="w-full text-ctp-text bg-ctp-mantle py-8 px-8 sm:px-14 flex gap-4 items-center justify-center inset-shadow-xs">
+    <footer className="w-full bg-ctp-mantle py-8 px-8 sm:px-14 flex gap-4 items-center justify-center inset-shadow-xs">
       <FooterIconButton
         onClick={() => setActiveModal("info")}
         className="ml-auto"
