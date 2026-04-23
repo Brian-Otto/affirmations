@@ -27,7 +27,7 @@ function SettingsDialog() {
                     <FieldLabel htmlFor="theme">
                         Theme
                     </FieldLabel>
-                    <ToggleGroup id="theme" type="single" variant={"outline"} defaultValue={localStorage.getItem("theme") || "system"} onValueChange={(value) => applyTheme(value as Theme)}>
+                    <ToggleGroup id="theme" type="single" variant={"outline"} defaultValue={localStorage.getItem("theme") || "system"} onValueChange={(value) => { if (value) applyTheme(value as Theme) }}>
                         <ToggleGroupItem value="system">
                             System
                         </ToggleGroupItem>
