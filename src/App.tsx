@@ -1,8 +1,8 @@
-import { Toaster } from "react-hot-toast";
 import AffirmationIcon from "./components/AffirmationIcon";
 import AffirmationText from "./components/AffirmationText";
 import Footer from "./components/Footer";
 import SWToast from "./components/SWToast";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
   return (

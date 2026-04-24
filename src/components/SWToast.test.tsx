@@ -1,15 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import { render, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import SWToast from "./SWToast.tsx";
-import userEvent from "@testing-library/user-event";
 
-vi.mock("react-hot-toast", () => ({
-  default: {
-    custom: vi.fn((renderFn) => {
-      const { unmount } = render(renderFn({ id: "test-id", visible: true }));
-      return { unmount };
-    }),
-    dismiss: vi.fn(),
+vi.mock("sonner", () => ({
+  toast: {
+    info: vi.fn(),
   },
 }));
 
@@ -17,11 +12,13 @@ vi.mock("../pwa", () => ({
   updateSW: vi.fn(),
 }));
 
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { updateSW } from "../pwa";
 
+const mockToastInfo = vi.mocked(toast.info);
+
 function firePwaEvent(name: "pwa-update" | "pwa-offline-ready") {
-  window.dispatchEvent(new Event(name));
+  act(() => window.dispatchEvent(new Event(name)));
 }
 
 describe("SWToast", () => {
@@ -30,58 +27,48 @@ describe("SWToast", () => {
   });
 
   describe("pwa-update event", () => {
-    it("shows the update toast when pwa-update fires", () => {
+    it("calls toast.info when pwa-update fires", () => {
       render(<SWToast />);
       firePwaEvent("pwa-update");
-
-      expect(screen.getByText("Neue Version verfügbar. Jetzt neu laden?")).toBeInTheDocument();
+      expect(mockToastInfo).toHaveBeenCalledTimes(1);
     });
 
-    it("dismisses the toast when Abbrechen is clicked", async () => {
+    it("shows the correct message", () => {
       render(<SWToast />);
       firePwaEvent("pwa-update");
-
-      await userEvent.click(screen.getByText("Abbrechen"));
-
-      expect(toast.dismiss).toHaveBeenCalledWith("test-id");
+      expect(mockToastInfo).toHaveBeenCalledWith("Neue Version verfügbar.", expect.objectContaining({
+        duration: Infinity,
+      }));
     });
 
-    it("calls updateSW and dismisses when Neu laden is clicked", async () => {
+    it("calls updateSW when Neu laden is clicked", () => {
       render(<SWToast />);
       firePwaEvent("pwa-update");
-
-      await userEvent.click(screen.getByText("Neu laden"));
-
+      const { action } = mockToastInfo.mock.calls[0][1] as any;
+      action.onClick();
       expect(updateSW).toHaveBeenCalledTimes(1);
-      expect(toast.dismiss).toHaveBeenCalledWith("test-id");
     });
   });
 
   describe("pwa-offline-ready event", () => {
-    it("shows the offline toast when pwa-offline-ready fires", () => {
+    it("calls toast.info when pwa-offline-ready fires", () => {
       render(<SWToast />);
       firePwaEvent("pwa-offline-ready");
-
-      expect(screen.getByText("App ist bereit für die Offline-Nutzung.")).toBeInTheDocument();
+      expect(mockToastInfo).toHaveBeenCalledTimes(1);
     });
 
-    it("dismisses the toast when OK is clicked", async () => {
+    it("shows the correct message", () => {
       render(<SWToast />);
       firePwaEvent("pwa-offline-ready");
-
-      await userEvent.click(screen.getByText("OK"));
-
-      expect(toast.dismiss).toHaveBeenCalledWith("test-id");
+      expect(mockToastInfo).toHaveBeenCalledWith("App ist bereit für die Offline-Nutzung.");
     });
   });
 
   it("removes event listeners on unmount", () => {
     const { unmount } = render(<SWToast />);
     unmount();
-
     firePwaEvent("pwa-update");
     firePwaEvent("pwa-offline-ready");
-
-    expect(toast.custom).not.toHaveBeenCalled();
+    expect(mockToastInfo).not.toHaveBeenCalled();
   });
 });
