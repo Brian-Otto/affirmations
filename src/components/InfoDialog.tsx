@@ -18,7 +18,7 @@ function InfoDialog() {
                         Infos
                     </DialogTitle>
                     <DialogDescription>
-                        Was sind Informationen? Und was macht diese App?
+                        Was sind Affirmationen? Und wozu diese App?
                     </DialogDescription>
                 </DialogHeader>
                 <div className="flex flex-col gap-4 no-scrollbar max-h-[50vh] overflow-y-auto ">
