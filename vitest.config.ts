@@ -2,13 +2,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
-import { resolve } from "path";
+import path, { resolve } from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
   resolve: {
     alias: {
+      "@": path.resolve(__dirname, "./src"),
       "virtual:pwa-register": resolve(__dirname, "src/__mocks__/virtual-pwa-register.ts"),
     },
   },

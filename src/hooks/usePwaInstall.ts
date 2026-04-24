@@ -5,8 +5,7 @@ interface BeforeInstallPromptEvent extends Event {
     userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 }
 
-function useFooter() {
-    const [activeModal, setActiveModal] = useState<"info" | "qr" | "settings" | null>(null);
+function usePwaInstall() {
     const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
 
     useEffect(() => {
@@ -25,7 +24,7 @@ function useFooter() {
         setDeferredPrompt(null)
     }
 
-    return { activeModal, setActiveModal, deferredPrompt, handleInstall }
+    return { deferredPrompt, handleInstall }
 }
 
-export default useFooter
+export default usePwaInstall;
