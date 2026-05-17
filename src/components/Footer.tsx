@@ -3,6 +3,7 @@ import { Download } from "lucide-react";
 import InfoDialog from "./InfoDialog";
 import QrDialog from "./QrDialog";
 import SettingsDialog from "./SettingsDialog";
+import AffirmationImageDialog from "./AffirmationImageDialog";
 import usePwaInstall from "@/hooks/usePwaInstall";
 
 function Footer() {
@@ -11,6 +12,7 @@ function Footer() {
   return (
     <footer className="w-full bg-ctp-mantle py-8 px-8 sm:px-14 flex gap-4 items-center justify-end">
       <InfoDialog />
+      <AffirmationImageDialog />
       <QrDialog />
       {deferredPrompt && (
         <Button onClick={handleInstall} size={"icon-lg"} variant={"secondary"} aria-label="App downloaden"><Download /></Button>
