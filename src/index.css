@@ -18,7 +18,7 @@
   --font-IndieFlower: "IndieFlower", system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-:root {
+:root, .light {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 
   font-synthesis: none;
