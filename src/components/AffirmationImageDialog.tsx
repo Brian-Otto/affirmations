@@ -66,17 +66,19 @@ function AffirmationImageDialog() {
             Lade die heutige Affirmation als Bild herunter.
           </DialogDescription>
         </DialogHeader>
-        <div
-          ref={captureRef}
-          className={cn(
-            "w-full aspect-square rounded-lg border",
-            "flex flex-col gap-4 justify-center items-center text-center p-6",
-            "bg-background text-foreground",
-            theme === "dark" ? "dark" : "light",
-          )}
-        >
-          <AffirmationIcon className="w-20 h-20" />
-          <AffirmationText className="text-2xl font-IndieFlower" />
+        <div className="w-full aspect-square rounded-lg border overflow-hidden">
+          <div
+            ref={captureRef}
+            className={cn(
+              "w-full aspect-square",
+              "flex flex-col gap-4 justify-center items-center text-center p-6",
+              "bg-background text-foreground",
+              theme === "dark" ? "dark" : "light",
+            )}
+          >
+            <AffirmationIcon className="w-20 h-20" />
+            <AffirmationText className="text-2xl font-IndieFlower" />
+          </div>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex gap-1">
