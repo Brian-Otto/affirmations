@@ -36,12 +36,9 @@ function AffirmationImageDialog() {
     const el = captureRef.current;
     if (!el) return;
     await document.fonts.ready;
-    const pixelRatio = OUTPUT_SIZE / el.getBoundingClientRect().width;
-    const dataUrl = await toPng(el, {
-      pixelRatio,
-      canvasWidth: OUTPUT_SIZE,
-      canvasHeight: OUTPUT_SIZE,
-    });
+    const width = Math.round(el.getBoundingClientRect().width);
+    const pixelRatio = OUTPUT_SIZE / width;
+    const dataUrl = await toPng(el, { pixelRatio, });
     const link = document.createElement("a");
     const date = new Date();
     const year = String(date.getFullYear()).padStart(4, "0");
