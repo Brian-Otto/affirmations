@@ -13,6 +13,7 @@ import { toPng } from "html-to-image";
 import { cn } from "../lib/utils";
 import AffirmationIcon from "./AffirmationIcon";
 import AffirmationText from "./AffirmationText";
+import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
 const OUTPUT_SIZE = 1080;
 
@@ -79,22 +80,19 @@ function AffirmationImageDialog() {
         </div>
         <div className="flex items-center justify-between">
           <div className="flex gap-1">
-            <Button
-              variant={theme === "light" ? "default" : "outline"}
-              size="icon"
-              onClick={() => setTheme("light")}
-              aria-label="Helles Design"
+            <ToggleGroup
+              type="single"
+              variant="outline"
+              value={theme}
+              onValueChange={(value) => { if (value) setTheme(value as "light" | "dark") }}
             >
-              <Sun className="size-4" />
-            </Button>
-            <Button
-              variant={theme === "dark" ? "default" : "outline"}
-              size="icon"
-              onClick={() => setTheme("dark")}
-              aria-label="Dunkles Design"
-            >
-              <Moon className="size-4" />
-            </Button>
+              <ToggleGroupItem value="light" aria-label="Helles Design">
+                <Sun className="size-4" />
+              </ToggleGroupItem>
+              <ToggleGroupItem value="dark" aria-label="Dunkles Design">
+                <Moon className="size-4" />
+              </ToggleGroupItem>
+            </ToggleGroup>
           </div>
           <Button onClick={downloadImage}>
             <Save className="size-4 mr-2" />
